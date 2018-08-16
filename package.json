@@ -1,6 +1,6 @@
 {
   "name": "@livelybone/date-generator",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "A module that generates years, months, dates, hours, minutes, seconds",
   "main": "./lib/index.js",
   "scripts": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/livelybone/date-generator#readme",
   "devDependencies": {
-    "copy-webpack-plugin": "^4.5.2"
+    "webpack": "^4.16.2",
+    "webpack-command": "^0.4.1"
   }
 }

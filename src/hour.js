@@ -1,3 +1,3 @@
-const getIntervalVal = require('./utils').getIntervalVal;
+var getIntervalVal = require('./utils').getIntervalVal;
 
 exports.getHour = getIntervalVal(23);
