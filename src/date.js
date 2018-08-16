@@ -86,6 +86,8 @@ function gntDate(year, month, minDate, maxDate) {
       }
     }
   }
+
+  return calendar
 }
 
 exports.gntDate = gntDate
