@@ -1,8 +1,8 @@
 var isNonNegInt = require('./utils').isNonNegInt
 
 function gntMonth(start, end) {
-  start = start || 1;
-  end = end || 12;
+  start = start || 1
+  end = end || 12
 
   if (!isNonNegInt(+start) || !isNonNegInt(end)) {
     throw new Error('Prop start and end must be a non-negative number')
@@ -17,14 +17,12 @@ function gntMonth(start, end) {
     throw new Error('Rule `+start < +end` must be matched')
   }
 
-  var arr = [];
+  var arr = []
   for (var i = +start; i <= +end; i++) {
     arr.push(i < 10 ? '0' + i : i + '')
   }
 
-  return arr;
+  return arr
 }
 
-if (typeof exports === 'object') {
-  exports.gntMonth = gntMonth
-}
+exports.gntMonth = gntMonth

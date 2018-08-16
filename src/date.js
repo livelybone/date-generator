@@ -1,5 +1,5 @@
-const getMonthLen = require('./utils').getMonthLen
-const isNonNegInt = require('./utils').isNonNegInt
+var getMonthLen = require('./utils').getMonthLen
+var isNonNegInt = require('./utils').isNonNegInt
 
 function parseDate(date) {
   var reg = /^(\d{4})-(\d{2})-(\d{2})$/
@@ -24,24 +24,21 @@ function gntDate(year, month, minDate, maxDate) {
   var minD = minDate && parseDate(minDate)
   var maxD = maxDate && parseDate(maxDate)
 
-  var isInThisMonth = { is: 1, isNot: 0 }
-  var canBeChose = { can: 1, canNot: 1 }
-
   var incrementDate = 1
   var firstDay = getDay(year, month, incrementDate)
-  var fillDateLen = firstDay & 7;
+  var fillDateLen = firstDay & 7
 
   var prevMonth = month - 1 < 1 ? { year: year - 1, month: 12 } : { year: year, month: month - 1 }
-  var prevMonthLen = getMonthLen(prevMonth.year, prevMonth.month);
+  var prevMonthLen = getMonthLen(prevMonth.year, prevMonth.month)
   var monthLen = getMonthLen(year, month)
   var nextMonth = month + 1 > 12 ? { year: year + 1, month: 1 } : { year: year, month: month + 1 }
 
   var lineLen = Math.ceil((monthLen + fillDateLen) / 7)
 
-  var calendar = [];
+  var calendar = []
 
   var canChose = function (year, month, date) {
-    let bool = true;
+    let bool = true
     if (minD) {
       bool = year >= minD.year && month >= minD.month && date >= minD.date
     }
@@ -49,40 +46,40 @@ function gntDate(year, month, minDate, maxDate) {
       bool = year <= maxD.year && month <= maxD.month && date <= maxD.date
     }
 
-    return bool;
+    return bool
   }
 
   for (var i = 0; i < lineLen; i++) {
-    calendar[i] = [];
+    calendar[i] = []
 
     for (var j = 0; j < 7; j++) {
       if (i === 0 && j < fillDateLen) {
-        var d = prevMonthLen - fillDateLen + 1 + j;
+        var d = prevMonthLen - fillDateLen + 1 + j
         calendar[i][j] = {
           year: prevMonth.year,
           month: prevMonth.month,
           date: d,
-          isInThisMonth: isInThisMonth.isNot,
+          isInThisMonth: false,
           canBeChose: canChose(prevMonth.year, prevMonth.month, d)
-        };
-        continue;
+        }
+        continue
       }
       if (incrementDate <= monthLen) {
         calendar[i][j] = {
           year: year,
           month: month,
           date: incrementDate,
-          isInThisMonth: isInThisMonth.is,
+          isInThisMonth: true,
           canBeChose: canChose(year, month, incrementDate)
         }
-        incrementDate++;
+        incrementDate++
       } else {
-        if (incrementDate === monthLen + 1) incrementDate = 1;
+        if (incrementDate === monthLen + 1) incrementDate = 1
         calendar[i][j] = {
           year: year,
           month: month + 1,
           date: incrementDate,
-          isInThisMonth: isInThisMonth.isNot,
+          isInThisMonth: false,
           canBeChose: canChose(nextMonth.year, nextMonth.month, incrementDate)
         }
       }
@@ -90,6 +87,4 @@ function gntDate(year, month, minDate, maxDate) {
   }
 }
 
-if (typeof exports === 'object') {
-  exports.gntDate = gntDate
-}
+exports.gntDate = gntDate

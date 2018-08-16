@@ -10,6 +10,4 @@ function getDay(year, month, date) {
   return (y + Math.floor(y / 4) + Math.floor(c / 4) - 2 * c + Math.floor(26 * (m + 1) / 10) + date - 1) % 7
 }
 
-if (typeof exports === 'object') {
-  exports.getDay = getDay
-}
+exports.getDay = getDay

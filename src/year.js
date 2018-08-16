@@ -2,7 +2,7 @@ var isNonNegInt = require('./utils').isNonNegInt
 
 function gntYear(start, len) {
   if (!isNonNegInt(+start) || !isNonNegInt(+len)) {
-    throw new Error('Prop start and len must be a non-negative number');
+    throw new Error('Prop start and len must be a non-negative number')
   }
 
   var arr = []
@@ -13,6 +13,4 @@ function gntYear(start, len) {
   return arr
 }
 
-if (typeof exports === 'object') {
-  exports.gntYear = gntYear
-}
+exports.gntYear = gntYear
