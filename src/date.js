@@ -34,7 +34,7 @@ function gntDate(year, month, minDate, maxDate) {
   var monthLen = getMonthLen(year, month)
   var nextMonth = month + 1 > 12 ? { year: year + 1, month: 1 } : { year: year, month: month + 1 }
 
-  var lineLen = Math.ceil((monthLen + fillDateLen) / 7)
+  var lineLen = Math.ceil(31 / 7) + 1;
 
   var calendar = []
 
