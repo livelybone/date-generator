@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 function getEntries() {
   const reg = /\.js$/;
@@ -16,11 +17,20 @@ const config = getEntries().map(item => ({
   entry: { index: item.filename },
   output: {
     path: path.resolve(__dirname, './lib'),
-    filename: `./${item.name}.js`,
+    filename: `./${item.name}.min.js`,
     library: 'index' === item.name ? 'DateGenerator' : `${item.name}DateGenerator`,
     libraryTarget: 'umd',
     globalObject: 'this',
   },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, './src'),
+        to: path.resolve(__dirname, './lib'),
+        ignore: ['.*'],
+      },
+    ]),
+  ]
 }));
 
 module.exports = config;
