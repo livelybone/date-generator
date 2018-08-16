@@ -1,3 +1,4 @@
+const getDay = require('./week').getDay;
 var getMonthLen = require('./utils').getMonthLen
 var isNonNegInt = require('./utils').isNonNegInt
 

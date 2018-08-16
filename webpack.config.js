@@ -21,14 +21,6 @@ const config = getEntries().map(item => ({
     libraryTarget: 'umd',
     globalObject: 'this',
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-      },
-    ],
-  },
 }));
 
 module.exports = config;
