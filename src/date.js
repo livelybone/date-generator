@@ -1,4 +1,4 @@
-var getDay = require('./week').getDay;
+var getDay = require('./week').getDay
 var getMonthLen = require('./utils').getMonthLen
 var isNonNegInt = require('./utils').isNonNegInt
 
@@ -34,17 +34,21 @@ function gntDate(year, month, minDate, maxDate) {
   var monthLen = getMonthLen(year, month)
   var nextMonth = month + 1 > 12 ? { year: year + 1, month: 1 } : { year: year, month: month + 1 }
 
-  var lineLen = Math.ceil(31 / 7) + 1;
+  var lineLen = Math.ceil(31 / 7) + 1
 
   var calendar = []
 
   var canChose = function (year, month, date) {
-    let bool = true
+    var bool = true
     if (minD) {
-      bool = year >= minD.year && month >= minD.month && date >= minD.date
+      bool = year >= minD.year
+        || (year < minD.year && month >= minD.month)
+        || (year < minD.year && month < minD.month && date >= minD.date)
     }
     if (maxD) {
-      bool = year <= maxD.year && month <= maxD.month && date <= maxD.date
+      bool = year <= maxD.year
+        || (year > maxD.year && month <= maxD.month)
+        || (year > maxD.year && month > maxD.month && date <= maxD.date)
     }
 
     return bool
