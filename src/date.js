@@ -77,8 +77,8 @@ function gntDate(year, month, minDate, maxDate) {
       } else {
         if (incrementDate === monthLen + 1) incrementDate = 1
         calendar[i][j] = {
-          year: year,
-          month: month + 1,
+          year: nextMonth.year,
+          month: nextMonth.month,
           date: incrementDate,
           isInThisMonth: false,
           canBeChose: canChose(nextMonth.year, nextMonth.month, incrementDate)
