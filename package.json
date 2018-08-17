@@ -1,11 +1,12 @@
 {
   "name": "@livelybone/date-generator",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "A module that generates years, months, dates, hours, minutes, seconds",
   "main": "./lib/index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack  --progress --mode production",
-    "test": "./node_modules/.bin/mocha ./test/index.spec.js"
+    "test": "./node_modules/.bin/mocha ./test/index.spec.js",
+    "eslint": "./node_modules/.bin/eslint ./src"
   },
   "repository": {
     "type": "git",
