@@ -12,10 +12,12 @@ function gntDate(year, month, options) {
   year = +year
   month = +month
 
-  var minD = options.min && parseDate(options.min)
-  var maxD = options.max && parseDate(options.max)
+  var minD = Object.assign({ year: 0, month: 0, date: 0 }, options.min && parseDate(options.min))
+  var maxD = Object.assign({ year: Infinity, month: Infinity, date: Infinity },
+    options.max && parseDate(options.max))
 
   var incrementDate = 1
+  var nextIncrementDate = 1
   var firstDay = getDay(year, month, incrementDate)
   var fillDateLen = firstDay & 7
   fillDateLen = fillDateLen === 0 ? 7 : fillDateLen
@@ -30,19 +32,13 @@ function gntDate(year, month, options) {
   var calendar = []
 
   var canChose = function (year, month, date) {
-    var bool = true
-    if (minD) {
-      bool = year >= minD.year
-        || (year < minD.year && month >= minD.month)
-        || (year < minD.year && month < minD.month && date >= minD.date)
+    var compare = function (t, flag) {
+      flag = flag || 1
+      return (year - t.year) * flag > 0
+        || (year === t.year && (month - t.month) * flag > 0)
+        || (year === t.year && month === t.month && (date - t.date) * flag >= 0)
     }
-    if (maxD) {
-      bool = year <= maxD.year
-        || (year > maxD.year && month <= maxD.month)
-        || (year > maxD.year && month > maxD.month && date <= maxD.date)
-    }
-
-    return bool
+    return compare(minD) && compare(maxD, -1)
   }
 
   for (var i = 0; i < lineLen; i++) {
@@ -70,14 +66,14 @@ function gntDate(year, month, options) {
         }
         incrementDate++
       } else {
-        if (incrementDate === monthLen + 1) incrementDate = 1
         calendar[i][j] = {
           year: fillTo(4, nextMonth.year),
           month: fillTo(2, nextMonth.month),
-          date: fillTo(2, incrementDate),
+          date: fillTo(2, nextIncrementDate),
           isInThisMonth: false,
           canBeChose: canChose(nextMonth.year, nextMonth.month, incrementDate)
         }
+        nextIncrementDate++
       }
     }
   }

@@ -39,18 +39,20 @@ function getIntervalVal(defaultMax) {
   }
 }
 
-function parseDate(date) {
-  var reg = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?$/
+function parseDate(date, type) {
+  type = type === 'month' ? 'month' : 'date'
+  var reg = /^(\d{4})-(\d{1,2})-?(\d{1,2})?$/
 
-  if (!reg.test(date)) throw new Error('Prop date is invalid. The right example: 2018-05-01')
+  if (!reg.test(date)) throw new Error('Utils.parseDate: Prop date is invalid. The right example: 2018-02[-01]')
 
   var arr = date.match(reg)
 
   if (!arr) return null
 
-  var dateObj = { year: +arr[1], month: +arr[2], date: +arr[4] }
+  var dateObj = { year: +arr[1], month: +arr[2], date: +arr[3] }
 
-  if (dateObj.month > 12 || dateObj.month < 1 || dateObj.date < 1 || dateObj.date > getMonthLen(dateObj.year, dateObj.month)) return null
+  if (dateObj.month > 12 || dateObj.month < 1
+    || (type === 'date' && (dateObj.date < 1 || dateObj.date > getMonthLen(dateObj.year, dateObj.month)))) return null
 
   return dateObj
 }

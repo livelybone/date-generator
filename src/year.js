@@ -15,6 +15,7 @@ function gntYear(start, len, options) {
     arr[i] = []
     for (var j = 0; j < splitLen; j++) {
       var year = start + i * splitLen + j
+      if (year - start + 1 > len) break
       arr[i].push({
         year: fillTo(4, year),
         canBeChose: (!min && !max)
