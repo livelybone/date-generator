@@ -1,25 +1,27 @@
-var isNonNegInt = require('./utils').isNonNegInt
+var fillTo = require('./utils').fillTo
+var parseDate = require('./utils').parseDate
 
-function gntMonth(start, end) {
-  start = start || 1
-  end = end || 12
-
-  if (!isNonNegInt(+start) || !isNonNegInt(end)) {
-    throw new Error('Prop start and end must be a non-negative number')
-  }
-  if (+start < 1) {
-    throw new Error('Prop start must be greater than 0')
-  }
-  if (+end > 12) {
-    throw new Error('Prop start must be less than 12')
-  }
-  if (+start >= +end) {
-    throw new Error('Rule `+start < +end` must be matched')
-  }
+function gntMonth(year, options) {
+  year = +year
+  var splitLen = options.splitLen || 3
+  var min = options.min && parseDate(options.min)
+  var max = options.max && parseDate(options.max)
 
   var arr = []
-  for (var i = +start; i <= +end; i++) {
-    arr.push({ month: i < 10 ? '0' + i : i + '' })
+  var line = Math.ceil(12 / splitLen)
+  for (var i = 0; i <= line; i++) {
+    arr[i] = []
+    for (var j = 0; j <= splitLen; j++) {
+      var month = i * splitLen + j + 1
+      arr[i].push({
+        year: fillTo(4, year),
+        month: fillTo(2, month),
+        canBeChose: (!min && !max)
+        || (min && max && (year > min.year || (year === min.year && month >= min.month)) && (year < max.year || (year === max.year && month <= max.month)))
+        || (!max && min && (year > min.year || (year === min.year && month >= min.month)))
+        || (!min && max && (year < max.year || (year === max.year && month <= max.month)))
+      })
+    }
   }
 
   return arr

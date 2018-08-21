@@ -1,3 +1,5 @@
+var fillTo = require('zero-fill')
+
 function isNonNegInt(num) {
   return +num === Math.floor(+num) && +num >= 0
 }
@@ -31,13 +33,31 @@ function getIntervalVal(defaultMax) {
 
     var arr = []
     for (var i = options.min; i <= options.max && i <= defaultMax; i += options.interval) {
-      arr.push(i < 10 ? '0' + i : i + '')
+      arr.push(fillTo(2, i))
     }
     return arr
   }
+}
+
+function parseDate(date) {
+  var reg = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?$/
+
+  if (!reg.test(date)) throw new Error('Prop date is invalid. The right example: 2018-05-01')
+
+  var arr = date.match(reg)
+
+  if (!arr) return null
+
+  var dateObj = { year: +arr[1], month: +arr[2], date: +arr[4] }
+
+  if (dateObj.month > 12 || dateObj.month < 1 || dateObj.date < 1 || dateObj.date > getMonthLen(dateObj.year, dateObj.month)) return null
+
+  return dateObj
 }
 
 exports.isNonNegInt = isNonNegInt
 exports.isLeapYear = isLeapYear
 exports.getMonthLen = getMonthLen
 exports.getIntervalVal = getIntervalVal
+exports.parseDate = parseDate
+exports.fillTo = fillTo
