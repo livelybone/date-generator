@@ -1,3 +1,3 @@
-var getIntervalVal = require('./utils').getIntervalVal;
+var getIntervalVal = require('./utils').getIntervalVal
 
-exports.getMinute = getIntervalVal(59);
+exports.getMinute = getIntervalVal(59)

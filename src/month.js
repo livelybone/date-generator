@@ -19,7 +19,7 @@ function gntMonth(start, end) {
 
   var arr = []
   for (var i = +start; i <= +end; i++) {
-    arr.push(i < 10 ? '0' + i : i + '')
+    arr.push({ month: i < 10 ? '0' + i : i + '' })
   }
 
   return arr

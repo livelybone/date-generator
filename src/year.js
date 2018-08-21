@@ -7,7 +7,7 @@ function gntYear(start, len) {
 
   var arr = []
   for (var i = 0; i < len; i++) {
-    arr.push(+start + i)
+    arr.push({ year: +start + i })
   }
 
   return arr
