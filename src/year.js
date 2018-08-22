@@ -11,7 +11,8 @@ function gntYear(start, len, options) {
   var max = options.max || null
 
   var arr = []
-  for (var i = 0; i < Math.ceil(len / splitLen); i++) {
+  var line = Math.ceil(len / splitLen)
+  for (var i = 0; i < line; i++) {
     arr[i] = []
     for (var j = 0; j < splitLen; j++) {
       var year = start + i * splitLen + j

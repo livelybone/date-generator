@@ -1,6 +1,6 @@
 {
   "name": "@livelybone/date-generator",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "A module that generates years, months, dates, hours, minutes, seconds",
   "main": "./lib/index.js",
   "scripts": {
