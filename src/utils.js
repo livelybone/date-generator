@@ -4,6 +4,15 @@ function isNonNegInt(num) {
   return +num === Math.floor(+num) && +num >= 0
 }
 
+function objAssign(o1, o2) {
+  o1 = typeof o1 === 'object' ? o1 : {}
+  o2 = typeof o2 === 'object' ? o2 : {}
+  return Object.keys(o1).concat(Object.keys(o2)).reduce(function (pre, k) {
+    if (!(k in pre)) pre[k] = o2[k] || o1[k]
+    return pre
+  }, {})
+}
+
 function isLeapYear(year) {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)
 }
@@ -21,7 +30,7 @@ function getMonthLen(year, month) {
 
 function getIntervalVal(defaultMax) {
   return function (options) {
-    options = Object.assign({}, { interval: 1, min: 0, max: defaultMax }, options)
+    options = objAssign({ interval: 1, min: 0, max: defaultMax }, options)
     var reset = function (k) {
       if (!isNonNegInt(options[k])) {
         options[k] = Math.ceil(Math.abs(options[k]))
@@ -63,3 +72,4 @@ exports.getMonthLen = getMonthLen
 exports.getIntervalVal = getIntervalVal
 exports.parseDate = parseDate
 exports.fillTo = fillTo
+exports.objAssign = objAssign

@@ -1,3 +1,4 @@
+var objAssign = require('./utils').objAssign
 var fillTo = require('./utils').fillTo
 var parseDate = require('./utils').parseDate
 var getDay = require('./week').getDay
@@ -12,8 +13,8 @@ function gntDate(year, month, options) {
   year = +year
   month = +month
 
-  var minD = Object.assign({ year: 0, month: 0, date: 0 }, options.min && parseDate(options.min))
-  var maxD = Object.assign({ year: Infinity, month: Infinity, date: Infinity },
+  var minD = objAssign({ year: 0, month: 0, date: 0 }, options.min && parseDate(options.min))
+  var maxD = objAssign({ year: Infinity, month: Infinity, date: Infinity },
     options.max && parseDate(options.max))
 
   var incrementDate = 1
