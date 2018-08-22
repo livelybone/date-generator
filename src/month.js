@@ -8,8 +8,7 @@ function gntMonth(year, options) {
   var max = options.max && parseDate(options.max, 'month')
 
   var arr = []
-  var line = Math.ceil(12 / splitLen)
-  for (var i = 0; i <= line; i++) {
+  for (var i = 0; i < Math.ceil(12 / splitLen); i++) {
     arr[i] = []
     for (var j = 0; j <= splitLen; j++) {
       var month = i * splitLen + j + 1
