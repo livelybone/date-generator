@@ -72,7 +72,7 @@ function gntDate(year, month, options) {
           month: fillTo(2, nextMonth.month),
           date: fillTo(2, nextIncrementDate),
           isInThisMonth: false,
-          canBeChose: canChose(nextMonth.year, nextMonth.month, incrementDate)
+          canBeChose: canChose(nextMonth.year, nextMonth.month, nextIncrementDate)
         }
         nextIncrementDate++
       }
