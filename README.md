@@ -28,20 +28,20 @@ import gntDate from '@livelybone/date-generator/lib/date'
 ...
 ```
 
-## Functions
-### gntYear
-### gntMonth
-### gntDate
-### getHour
-### getMinute
-### getSecond
-### utils
-#### isNonNegInt
-#### mod
-#### isLeapYear
-#### getMonthLen
-#### getIntervalVal
-#### parseDate
-#### parseTime
-#### fillTo
-#### objAssign
+## `Functions`
+### `gntYear`
+### `gntMonth`
+### `gntDate`
+### `getHour`
+### `getMinute`
+### `getSecond`
+### `utils`
+#### `isNonNegInt`
+#### `mod`
+#### `isLeapYear`
+#### `getMonthLen`
+#### `getIntervalVal`
+#### `parseDate`
+#### `parseTime`
+#### `fillTo`
+#### `objAssign`
