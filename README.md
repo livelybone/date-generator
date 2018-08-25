@@ -28,7 +28,7 @@ import gntDate from '@livelybone/date-generator/lib/date'
 ...
 ```
 
-## `Functions`
+## Functions
 ### `gntYear`
 ### `gntMonth`
 ### `gntDate`
