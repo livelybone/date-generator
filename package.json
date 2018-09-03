@@ -1,10 +1,12 @@
 {
   "name": "@livelybone/date-generator",
-  "version": "2.5.1",
+  "version": "3.0.0-beta0",
   "description": "A module that generates years, months, dates, hours, minutes, seconds",
-  "main": "./lib/index.js",
+  "main": "./lib/umd/index.js",
+  "module": "./lib/es/index.js",
+  "unpkg": "./lib/umd/index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack  --progress --mode production",
+    "build": "rimraf ./lib && rollup -c",
     "test": "./node_modules/.bin/mocha ./test/index.spec.js",
     "eslint": "./node_modules/.bin/eslint ./src"
   },
@@ -28,8 +30,10 @@
   "devDependencies": {
     "eslint": "^5.3.0",
     "mocha": "^5.2.0",
-    "webpack": "^4.16.2",
-    "webpack-command": "^0.4.1",
+    "rollup": "^0.65.0",
+    "rollup-plugin-commonjs": "^9.1.6",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^5.0.2",
     "zero-fill": "^2.2.3"
   }
 }
