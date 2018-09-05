@@ -3,7 +3,17 @@ import { getHour } from './hour'
 import { getMinute } from './minute'
 import { gntMonth } from './month'
 import { getSecond } from './second'
-import * as utils from './utils'
+import {
+  fillTo,
+  getIntervalVal,
+  getMonthLen,
+  isLeapYear,
+  isNonNegInt,
+  mod,
+  objAssign,
+  parseDate,
+  parseTime
+} from './utils'
 import { getDay } from './week'
 import { gntYear } from './year'
 
@@ -15,5 +25,13 @@ export {
   getHour,
   getMinute,
   getSecond,
-  utils,
+  fillTo,
+  isNonNegInt,
+  objAssign,
+  mod,
+  isLeapYear,
+  getMonthLen,
+  getIntervalVal,
+  parseDate,
+  parseTime
 }
