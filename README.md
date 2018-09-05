@@ -23,8 +23,9 @@ import {gntYear,
         getMinute,
         getSecond,
         utils} from '@livelybone/date-generator';
+
 // import what you want
-import gntDate from '@livelybone/date-generator/lib/date'
+import gntDate from '@livelybone/date-generator/lib/umd/date'
 ...
 ```
 
