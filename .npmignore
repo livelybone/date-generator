@@ -13,7 +13,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-webpack.*.js
 rollup.*.js
 /src/
 /index.js
