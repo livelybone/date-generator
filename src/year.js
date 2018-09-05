@@ -1,7 +1,6 @@
-var fillTo = require('./utils').fillTo
-var isNonNegInt = require('./utils').isNonNegInt
+import { fillTo, isNonNegInt } from './utils'
 
-function gntYear(start, len, options) {
+export function gntYear(start, len, options) {
   if (!isNonNegInt(+start) || !isNonNegInt(+len)) {
     throw new Error('Prop start and len must be a non-negative number')
   }
@@ -29,5 +28,3 @@ function gntYear(start, len, options) {
 
   return arr
 }
-
-exports.gntYear = gntYear

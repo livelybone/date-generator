@@ -1,17 +1,19 @@
-var gntYear = require('./year').gntYear
-var gntMonth = require('./month').gntMonth
-var gntDate = require('./date').gntDate
-var getDay = require('./week').getDay
-var getHour = require('./hour').getHour
-var getMinute = require('./minute').getMinute
-var getSecond = require('./second').getSecond
-var utils = require('./utils')
+import { gntDate } from './date'
+import { getHour } from './hour'
+import { getMinute } from './minute'
+import { gntMonth } from './month'
+import { getSecond } from './second'
+import * as utils from './utils'
+import { getDay } from './week'
+import { gntYear } from './year'
 
-exports.gntYear = gntYear
-exports.gntMonth = gntMonth
-exports.gntDate = gntDate
-exports.getDay = getDay
-exports.getHour = getHour
-exports.getMinute = getMinute
-exports.getSecond = getSecond
-exports.utils = utils
+export {
+  gntYear,
+  gntMonth,
+  gntDate,
+  getDay,
+  getHour,
+  getMinute,
+  getSecond,
+  utils,
+}

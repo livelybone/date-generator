@@ -1,3 +1,3 @@
-var getIntervalVal = require('./utils').getIntervalVal
+import { getIntervalVal } from './utils'
 
-exports.getHour = getIntervalVal(24)
+export var getHour = getIntervalVal(24)

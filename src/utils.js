@@ -1,10 +1,12 @@
-var fillTo = require('zero-fill')
+import fillTo from 'zero-fill'
 
-function isNonNegInt(num) {
+export { fillTo }
+
+export function isNonNegInt(num) {
   return +num === Math.floor(+num) && +num >= 0
 }
 
-function objAssign(o1, o2) {
+export function objAssign(o1, o2) {
   o1 = typeof o1 === 'object' ? o1 : {}
   o2 = typeof o2 === 'object' ? o2 : {}
   return Object.keys(o1).concat(Object.keys(o2)).reduce(function (pre, k) {
@@ -13,15 +15,15 @@ function objAssign(o1, o2) {
   }, {})
 }
 
-function mod(val, div) {
+export function mod(val, div) {
   return (val % div + div) % div
 }
 
-function isLeapYear(year) {
+export function isLeapYear(year) {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)
 }
 
-function getMonthLen(year, month) {
+export function getMonthLen(year, month) {
   year = +year
   month = +month
 
@@ -32,7 +34,7 @@ function getMonthLen(year, month) {
   return Math.ceil(Math.abs(month - 7.5)) % 2 === 1 ? 31 : 30
 }
 
-function getIntervalVal(defaultMax) {
+export function getIntervalVal(defaultMax) {
   return function (options) {
     options = objAssign({ interval: 1, min: 0, max: defaultMax - 1 }, options)
     var reset = function (k) {
@@ -56,7 +58,7 @@ function getIntervalVal(defaultMax) {
   }
 }
 
-function parseDate(date) {
+export function parseDate(date) {
   var reg = /^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/
 
   if (!reg.test(date)) throw new Error('Utils.parseDate: Param date is invalid. The right example: 2018[-02][-01]')
@@ -72,7 +74,7 @@ function parseDate(date) {
   return dateObj
 }
 
-function parseTime(time) {
+export function parseTime(time) {
   var reg = /^(\d{1,2}):?(\d{1,2})?:?(\d{1,2})?$/
 
   if (!reg.test(time)) throw new Error('Utils.parseDate: Param time is invalid. The right example: 18[:02][:01]')
@@ -83,13 +85,3 @@ function parseTime(time) {
 
   return { hour: mod(+arr[1], 24), minute: mod(+arr[2] || 0, 60), second: mod(+arr[3] || 0, 60) }
 }
-
-exports.isNonNegInt = isNonNegInt
-exports.mod = mod
-exports.isLeapYear = isLeapYear
-exports.getMonthLen = getMonthLen
-exports.getIntervalVal = getIntervalVal
-exports.parseDate = parseDate
-exports.parseTime = parseTime
-exports.fillTo = fillTo
-exports.objAssign = objAssign

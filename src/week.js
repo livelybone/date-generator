@@ -1,6 +1,6 @@
-var mod = require('./utils').mod
+import { mod } from './utils'
 
-function getDay(year, month, date) {
+export function getDay(year, month, date) {
   year = +year
   month = +month
   date = +date
@@ -18,5 +18,3 @@ function getDay(year, month, date) {
 
   return mod(y + Math.floor(y / 4) + Math.floor(c / 4) - 2 * c + Math.floor(26 * (m + 1) / 10) + date - 1, 7)
 }
-
-exports.getDay = getDay

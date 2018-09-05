@@ -1,7 +1,6 @@
-var fillTo = require('./utils').fillTo
-var parseDate = require('./utils').parseDate
+import { fillTo, parseDate } from './utils'
 
-function gntMonth(year, options) {
+export function gntMonth(year, options) {
   year = +year
   var splitLen = options.splitLen || 3
   var min = options.min && parseDate(options.min, 'month')
@@ -27,5 +26,3 @@ function gntMonth(year, options) {
 
   return arr
 }
-
-exports.gntMonth = gntMonth
