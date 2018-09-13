@@ -1,12 +1,12 @@
 {
   "name": "@livelybone/date-generator",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A module that generates years, months, dates, hours, minutes, seconds",
   "main": "./lib/umd/index.js",
   "module": "./lib/es/index.js",
   "unpkg": "./lib/umd/index.js",
   "scripts": {
-    "build": "rimraf ./lib && rollup -c",
+    "build": "rimraf ./lib && cross-env NODE_ENV=production rollup -c",
     "test": "./node_modules/.bin/mocha ./test/index.spec.js",
     "eslint": "./node_modules/.bin/eslint ./src"
   },
