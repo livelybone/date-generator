@@ -1,6 +1,12 @@
 import { getDay } from './index'
 import { fillTo, getMonthLen, isNonNegInt, objAssign, parseDate } from './utils'
 
+/**
+ * @param {Integer} year
+ * @param {Integer} month
+ * @param {Object} options -> {min: String, max: String}, string format: /^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/
+ * @return {Array<Array<{year: Integer, month: Integer, date: Integer, isInThisMonth: Boolean, canBeChose: Boolean}>>}
+ * */
 export function gntDate(year, month, options) {
   if (!isNonNegInt(year) || !isNonNegInt(month)) {
     throw new Error('Prop year and month must be a non-negative number')

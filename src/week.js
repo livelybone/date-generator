@@ -1,5 +1,11 @@
 import { mod } from './utils'
 
+/**
+ * @param {Integer} year
+ * @param {Integer} month
+ * @param {Integer} date
+ * @return {Integer} [0,1,2,3,4,5,6]
+ * */
 export function getDay(year, month, date) {
   year = +year
   month = +month

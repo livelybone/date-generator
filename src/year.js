@@ -1,5 +1,11 @@
 import { fillTo, isNonNegInt } from './utils'
 
+/**
+ * @param {Integer} start
+ * @param {Integer} len
+ * @param {Object<{min: Integer, max: Integer}>} options ->
+ * @return {Array<{year: Integer, canBeChose: Boolean}>}
+ * */
 export function gntYear(start, len, options) {
   if (!isNonNegInt(+start) || !isNonNegInt(+len)) {
     throw new Error('Prop start and len must be a non-negative number')

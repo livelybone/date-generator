@@ -3,6 +3,7 @@ const path = require('path')
 const { uglify } = require('rollup-plugin-uglify')
 const resolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
+const license = require('rollup-plugin-license')
 const formats = ['es', 'umd']
 
 function getEntries() {
@@ -27,6 +28,13 @@ const conf = entry => ({
     resolve(),
     commonjs(),
     (entry.needUglify !== false && uglify()),
+    license({
+      banner: `Bundle of <%= pkg.name %>
+               Generated: <%= moment().format('YYYY-MM-DD') %>
+               Version: <%= pkg.version %>
+               License: <%= pkg.license %>
+               Author: <%= pkg.author %>`,
+    }),
   ]
 })
 

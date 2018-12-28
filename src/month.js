@@ -1,5 +1,10 @@
 import { fillTo, parseDate } from './utils'
 
+/**
+ * @param {Integer} year
+ * @param {Object<{min: String, max: String}>} options, string format: /^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/
+ * @return {Array<Array<{year: Integer, month: Integer, canBeChose: Boolean}>>}
+ * */
 export function gntMonth(year, options) {
   year = +year
   var splitLen = options.splitLen || 3
