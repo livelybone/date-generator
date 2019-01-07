@@ -12,7 +12,7 @@ A module that generates years, months, dates, hours, minutes, seconds
 https://github.com/livelybone/date-generator.git
 
 ## Demo
-https://livelybone.github.io/tool/date-generator
+https://livelybone.github.io/tool/date-generator/
 
 ## Installation
 ```bash
