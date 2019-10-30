@@ -1,5 +1,5 @@
-import { getDay } from './index'
 import { fillTo, getMonthLen, isNonNegInt, objAssign, parseDate } from './utils'
+import { getDay } from './week'
 
 /**
  * @param {Integer} year
