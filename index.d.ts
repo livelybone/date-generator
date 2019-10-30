@@ -100,7 +100,7 @@ declare interface GntMonthOptions {
   /**
    * Default: 3
    * */
-  splitLen: number
+  splitLen?: number
   /**
    * Min Month
    * */
@@ -117,7 +117,7 @@ declare interface GntYearOptions {
   /**
    * Default: 3
    * */
-  splitLen: number
+  splitLen?: number
   /**
    * Min year
    * */
