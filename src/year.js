@@ -3,7 +3,7 @@ import { fillTo, isNonNegInt } from './utils'
 /**
  * @param {Integer} start
  * @param {Integer} len
- * @param {Object<{min: Integer, max: Integer}>} options ->
+ * @param {Object<{min: Integer, max: Integer, splitLen: number}>} options ->
  * @return {Array<{year: Integer, canBeChose: Boolean}>}
  * */
 export function gntYear(start, len, options) {

@@ -2,14 +2,14 @@ import { fillTo, parseDate } from './utils'
 
 /**
  * @param {Integer} year
- * @param {Object<{min: String, max: String}>} options, string format: /^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/
+ * @param {Object<{min: String, max: String, splitLen: number}>} options, string format: /^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/
  * @return {Array<Array<{year: Integer, month: Integer, canBeChose: Boolean}>>}
  * */
 export function gntMonth(year, options) {
   year = +year
   var splitLen = options.splitLen || 3
-  var min = options.min && parseDate(options.min, 'month')
-  var max = options.max && parseDate(options.max, 'month')
+  var min = options.min && parseDate(options.min)
+  var max = options.max && parseDate(options.max)
 
   var arr = []
   var line = Math.ceil(12 / splitLen)

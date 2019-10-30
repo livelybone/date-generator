@@ -90,13 +90,17 @@ declare interface GntDateOptions {
 
 declare function gntDate(year: Integer, month: Integer, options?: GntDateOptions): DateInfo[][]
 
-declare interface MouthInfo {
+declare interface MonthInfo {
   year: Integer
   month: Integer
   canBeChose: Boolean
 }
 
 declare interface GntMonthOptions {
+  /**
+   * Default: 3
+   * */
+  splitLen: number
   /**
    * Min Month
    * */
@@ -107,9 +111,13 @@ declare interface GntMonthOptions {
   max?: DateStr
 }
 
-declare function gntMonth(year: Integer, options: GntMonthOptions): MouthInfo[][]
+declare function gntMonth(year: Integer, options: GntMonthOptions): MonthInfo[][]
 
 declare interface GntYearOptions {
+  /**
+   * Default: 3
+   * */
+  splitLen: number
   /**
    * Min year
    * */
@@ -125,7 +133,7 @@ declare interface YearInfo {
   canBeChose: Boolean
 }
 
-declare function gntYear(start: Integer, len: Integer, options: GntYearOptions): YearInfo[]
+declare function gntYear(start: Integer, len: Integer, options: GntYearOptions): YearInfo[][]
 
 export {
   fillTo,
