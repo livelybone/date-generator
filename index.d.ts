@@ -31,7 +31,7 @@ declare interface GetResultItem<M extends number = DefaultHourMax> {
 }
 
 declare interface GetOptions {
-  interval: Integer
+  interval?: Integer
   min: Integer
   max: Integer
 }
