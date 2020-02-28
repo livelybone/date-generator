@@ -1,6 +1,5 @@
-import { nowDate } from './date'
 import { GntYearOptions, Integer, IntegerStr, YearInfo } from './types'
-import { fillTo, isNonNegInt } from './utils'
+import { fillTo, isNonNegInt, nowDate } from './utils'
 
 export function gntYear(
   start: IntegerStr,

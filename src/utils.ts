@@ -117,3 +117,21 @@ export function parseTime(time: TimeStr) {
     second: fillTo(2, positiveMod(+arr[3] || 0, 60)),
   } as TimeInfo
 }
+
+export function nowDate(): DateInfoBase {
+  const now = new Date()
+  return {
+    year: fillTo(4, now.getFullYear()),
+    month: fillTo(2, now.getMonth() + 1),
+    date: fillTo(2, now.getDate()),
+  }
+}
+
+export function nowTime(): TimeInfo {
+  const now = new Date()
+  return {
+    hour: fillTo(2, now.getHours()),
+    minute: fillTo(2, now.getMinutes()),
+    second: fillTo(2, now.getSeconds()),
+  }
+}

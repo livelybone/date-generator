@@ -1,4 +1,3 @@
-import { nowDate } from './date'
 import {
   DateStr,
   GntMonthOptions,
@@ -6,7 +5,7 @@ import {
   IntegerStr,
   MonthInfo,
 } from './types'
-import { fillTo, parseDate, positiveMod } from './utils'
+import { fillTo, nowDate, parseDate, positiveMod } from './utils'
 
 export function gntMonth(year: IntegerStr, options?: GntMonthOptions) {
   year = +year

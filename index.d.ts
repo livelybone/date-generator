@@ -168,8 +168,6 @@ declare enum DateCompare {
   LessThanYear = -100,
 }
 
-declare function nowDate(): DateInfoBase
-
 declare function compareDates(
   date1: DateInfoBase1 | DateStr,
   date2: DateInfoBase1 | DateStr,
@@ -211,8 +209,6 @@ declare const getSecond: (
   options?: GetOptions | undefined,
 ) => GetResultItem<DefaultMax.Minute>[]
 
-declare function nowTime(): TimeInfo
-
 declare function gntMonth(
   year: IntegerStr,
   options?: GntMonthOptions,
@@ -252,6 +248,10 @@ declare function getIntervalVal<T extends DefaultMax>(
 declare function parseDate(date: DateStr): DateInfoBase | null
 
 declare function parseTime(time: TimeStr): TimeInfo | null
+
+declare function nowDate(): DateInfoBase
+
+declare function nowTime(): TimeInfo
 
 declare function getDay(
   year: IntegerStr,

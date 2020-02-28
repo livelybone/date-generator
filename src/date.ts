@@ -14,18 +14,10 @@ import {
   getMonthLen,
   isLeapYear,
   isNonNegInt,
+  nowDate,
   parseDate,
 } from './utils'
 import { getDay } from './week'
-
-export function nowDate(): DateInfoBase {
-  const now = new Date()
-  return {
-    year: fillTo(4, now.getFullYear()),
-    month: fillTo(2, now.getMonth() + 1),
-    date: fillTo(2, now.getDate()),
-  }
-}
 
 export function compareDates(
   date1: DateInfoBase1 | DateStr,
