@@ -2,7 +2,11 @@
  * Integer number
  * */
 export type Integer = number
-export type IntegerStr = Integer | string
+/**
+ * Format: /^\d\d$/
+ * */
+export type NumberStr = string
+export type IntegerStr = Integer | NumberStr
 
 export enum DefaultMax {
   Hour = 23,
@@ -19,11 +23,6 @@ export type DateStr = string
  * Format: /^(\d{1,2}):?(\d{1,2})?:?(\d{1,2})?$/
  * */
 export type TimeStr = string
-
-/**
- * Format: /^\d\d$/
- * */
-export type NumberStr = string
 
 export interface GetResultItem<M extends DefaultMax> {
   value: NumberStr
@@ -43,19 +42,19 @@ export interface DateInfoBase {
    *
    * 已格式化的字符串，例如：`2020`
    * */
-  year: string
+  year: NumberStr
   /**
    * String that already been formatted, such as `02`
    *
    * 已格式化的字符串，例如：`02`
    * */
-  month: string
+  month: NumberStr
   /**
    * String that already been formatted, such as `01`
    *
    * 已格式化的字符串，例如：`01`
    * */
-  date: string
+  date: NumberStr
 }
 
 export interface DateInfoBase1 {
@@ -70,19 +69,19 @@ export interface TimeInfo {
    *
    * 已格式化的字符串，例如：`02`
    * */
-  hour: string
+  hour: NumberStr
   /**
    * String that already been formatted, such as `02`
    *
    * 已格式化的字符串，例如：`02`
    * */
-  minute: string
+  minute: NumberStr
   /**
    * String that already been formatted, such as `02`
    *
    * 已格式化的字符串，例如：`02`
    * */
-  second: string
+  second: NumberStr
 }
 
 export interface DateInfo extends DateInfoBase {
@@ -108,13 +107,13 @@ export interface MonthInfo {
    *
    * 已格式化的字符串，例如：`2020`
    * */
-  year: string
+  year: NumberStr
   /**
    * String that already been formatted, such as `02`
    *
    * 已格式化的字符串，例如：`02`
    * */
-  month: string
+  month: NumberStr
   canBeChose: boolean
 }
 
@@ -154,7 +153,7 @@ export interface YearInfo {
    *
    * 已格式化的字符串，例如：`2020`
    * */
-  year: string
+  year: NumberStr
   canBeChose: boolean
 }
 

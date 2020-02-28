@@ -2,7 +2,11 @@
  * Integer number
  * */
 declare type Integer = number
-declare type IntegerStr = Integer | string
+/**
+ * Format: /^\d\d$/
+ * */
+declare type NumberStr = string
+declare type IntegerStr = Integer | NumberStr
 
 declare enum DefaultMax {
   Hour = 23,
@@ -18,10 +22,6 @@ declare type DateStr = string
  * Format: /^(\d{1,2}):?(\d{1,2})?:?(\d{1,2})?$/
  * */
 declare type TimeStr = string
-/**
- * Format: /^\d\d$/
- * */
-declare type NumberStr = string
 
 interface GetResultItem<M extends DefaultMax> {
   value: NumberStr
@@ -41,19 +41,19 @@ interface DateInfoBase {
    *
    * 已格式化的字符串，例如：`2020`
    * */
-  year: string
+  year: NumberStr
   /**
    * String that already been formatted, such as `02`
    *
    * 已格式化的字符串，例如：`02`
    * */
-  month: string
+  month: NumberStr
   /**
    * String that already been formatted, such as `01`
    *
    * 已格式化的字符串，例如：`01`
    * */
-  date: string
+  date: NumberStr
 }
 
 interface DateInfoBase1 {
@@ -68,19 +68,19 @@ interface TimeInfo {
    *
    * 已格式化的字符串，例如：`02`
    * */
-  hour: string
+  hour: NumberStr
   /**
    * String that already been formatted, such as `02`
    *
    * 已格式化的字符串，例如：`02`
    * */
-  minute: string
+  minute: NumberStr
   /**
    * String that already been formatted, such as `02`
    *
    * 已格式化的字符串，例如：`02`
    * */
-  second: string
+  second: NumberStr
 }
 
 interface DateInfo extends DateInfoBase {
@@ -106,13 +106,13 @@ interface MonthInfo {
    *
    * 已格式化的字符串，例如：`2020`
    * */
-  year: string
+  year: NumberStr
   /**
    * String that already been formatted, such as `02`
    *
    * 已格式化的字符串，例如：`02`
    * */
-  month: string
+  month: NumberStr
   canBeChose: boolean
 }
 
@@ -152,7 +152,7 @@ interface YearInfo {
    *
    * 已格式化的字符串，例如：`2020`
    * */
-  year: string
+  year: NumberStr
   canBeChose: boolean
 }
 
@@ -165,6 +165,8 @@ declare enum DateCompare {
   LessThanMonth = -10,
   LessThanYear = -100,
 }
+
+declare function nowDate(): DateInfoBase
 
 declare function compareDates(
   date1: DateInfoBase1 | DateStr,
@@ -206,6 +208,8 @@ declare const getMinute: (
 declare const getSecond: (
   options?: GetOptions | undefined,
 ) => GetResultItem<DefaultMax.Minute>[]
+
+declare function nowTime(): TimeInfo
 
 declare function gntMonth(
   year: IntegerStr,
@@ -294,6 +298,8 @@ export {
   gntYear,
   isLeapYear,
   isNonNegInt,
+  nowDate,
+  nowTime,
   objAssign,
   parseDate,
   parseTime,
