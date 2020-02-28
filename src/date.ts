@@ -18,6 +18,15 @@ import {
 } from './utils'
 import { getDay } from './week'
 
+export function nowDate(): DateInfoBase {
+  const now = new Date()
+  return {
+    year: fillTo(4, now.getFullYear()),
+    month: fillTo(2, now.getMonth() + 1),
+    date: fillTo(2, now.getDate()),
+  }
+}
+
 export function compareDates(
   date1: DateInfoBase1 | DateStr,
   date2: DateInfoBase1 | DateStr,
@@ -143,12 +152,7 @@ export function gntCalendar(
   const firstDay = getDay(year, month, 1)
   const fillDateLen = firstDay === 0 ? 7 : firstDay
 
-  const $now = new Date()
-  const now = {
-    year: $now.getFullYear(),
-    month: $now.getMonth() + 1,
-    date: $now.getDate(),
-  }
+  const now = nowDate()
   for (let i = 0; i < lineLen; i += 1) {
     calendar[i] = []
 
