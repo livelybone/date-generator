@@ -39,58 +39,79 @@ export function compareDates(
 }
 
 export function calcStepBetweenDates(
-  date1: DateInfoBase1 | DateStr,
-  date2: DateInfoBase1 | DateStr,
+  date: DateInfoBase1 | DateStr,
+  targetDate: DateInfoBase1 | DateStr,
 ): number {
-  const $date1 = typeof date1 === 'string' ? parseDate(date1) : date1
-  const $date2 = typeof date2 === 'string' ? parseDate(date2) : date2
-  if (!$date1 || !$date2) return 0
-  const sorted = [$date1, $date2].sort(compareDates)
+  const $date = typeof date === 'string' ? parseDate(date) : date
+  const $targetDate =
+    typeof targetDate === 'string' ? parseDate(targetDate) : targetDate
+  if (!$date || !$targetDate) return 0
 
-  const yearStep = +sorted[1].year - +sorted[0].year
+  const compare = compareDates($date, $targetDate)
+  if (compare === 0) return 0
+
+  const small = compare > 0 ? $targetDate : $date
+  const big = compare > 0 ? $date : $targetDate
+  const flag = compare > 0 ? 1 : -1
+
+  const yearStep = +big.year - +small.year
   if (yearStep > 1) {
     return (
-      new Array(yearStep)
+      (new Array(yearStep)
         .join(',')
-        .split(',')
+        .split('')
         .reduce((pre, v, i) => {
-          const year = +sorted[0].year + i + 1
+          const year = +small.year + i + 1
           return pre + (isLeapYear(year) ? 366 : 365)
         }, 0) +
-      calcStepBetweenDates(sorted[0], { ...sorted[0], month: 12, date: 31 }) +
-      calcStepBetweenDates({ ...sorted[1], month: 1, date: 1 }, sorted[1])
+        calcStepBetweenDates({ ...small, month: 12, date: 31 }, small) +
+        calcStepBetweenDates(big, { ...big, month: 1, date: 1 }) +
+        1) *
+      flag
     )
   }
 
   if (yearStep === 1) {
     return (
-      calcStepBetweenDates(sorted[0], { ...sorted[0], month: 12, date: 31 }) +
-      calcStepBetweenDates({ ...sorted[1], month: 1, date: 1 }, sorted[1])
+      (calcStepBetweenDates({ ...small, month: 12, date: 31 }, small) +
+        calcStepBetweenDates(big, { ...big, month: 1, date: 1 }) +
+        1) *
+      flag
     )
   }
 
-  const monthStep = +sorted[1].month - +sorted[0].month
+  const monthStep = +big.month - +small.month
   if (monthStep > 1) {
     return (
-      new Array(monthStep)
+      (new Array(monthStep)
         .join(',')
-        .split(',')
+        .split('')
         .reduce((pre, v, i) => {
-          const month = +sorted[0].month + i + 1
-          return pre + getMonthLen(sorted[0].year, month)
+          const month = +small.month + i + 1
+          return pre + getMonthLen(small.year, month)
         }, 0) +
-      calcStepBetweenDates(sorted[0], { ...sorted[0], date: 31 }) +
-      calcStepBetweenDates({ ...sorted[1], date: 1 }, sorted[1])
+        calcStepBetweenDates(
+          { ...small, date: getMonthLen(small.year, small.month) },
+          small,
+        ) +
+        calcStepBetweenDates(big, { ...big, date: 1 }) +
+        1) *
+      flag
     )
   }
   if (monthStep === 1) {
     return (
-      calcStepBetweenDates(sorted[0], { ...sorted[0], date: 31 }) +
-      calcStepBetweenDates({ ...sorted[1], date: 1 }, sorted[1])
+      (calcStepBetweenDates(
+        { ...small, date: getMonthLen(small.year, small.month) },
+        small,
+      ) +
+        calcStepBetweenDates(big, { ...big, date: 1 }) +
+        1) *
+      flag
     )
   }
 
-  return +sorted[1].month - +sorted[0].month
+  return (+big.date - +small.date) * flag
 }
 
 export function gntCalendar(
