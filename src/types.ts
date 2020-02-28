@@ -58,6 +58,12 @@ export interface DateInfoBase {
   date: string
 }
 
+export interface DateInfoBase1 {
+  year: IntegerStr
+  month: IntegerStr
+  date: IntegerStr
+}
+
 export interface TimeInfo {
   /**
    * String that already been formatted, such as `02`
@@ -81,6 +87,7 @@ export interface TimeInfo {
 
 export interface DateInfo extends DateInfoBase {
   isInThisMonth: boolean
+  isNow: boolean
   canBeChose: boolean
 }
 
@@ -88,11 +95,11 @@ export interface GntCalendarOptions {
   /**
    * Min date
    * */
-  min?: { year: IntegerStr; month: IntegerStr; date: IntegerStr } | DateStr
+  min?: DateInfoBase1 | DateStr
   /**
    * Max date
    * */
-  max?: { year: IntegerStr; month: IntegerStr; date: IntegerStr } | DateStr
+  max?: DateInfoBase1 | DateStr
 }
 
 export interface MonthInfo {
@@ -119,11 +126,11 @@ export interface GntMonthOptions {
   /**
    * Min Month
    * */
-  min?: { year: IntegerStr; month: IntegerStr } | DateStr
+  min?: Pick<DateInfoBase1, 'year' | 'month'> | DateStr
   /**
    * Max Month
    * */
-  max?: { year: IntegerStr; month: IntegerStr } | DateStr
+  max?: Pick<DateInfoBase1, 'year' | 'month'> | DateStr
 }
 
 export interface GntYearOptions {
@@ -149,4 +156,14 @@ export interface YearInfo {
    * */
   year: string
   canBeChose: boolean
+}
+
+export enum DateCompare {
+  GreatThanYear = 100,
+  GreatThanMonth = 10,
+  GreatThanDate = 1,
+  Equal = 0,
+  LessThanDate = -1,
+  LessThanMonth = -10,
+  LessThanYear = -100,
 }

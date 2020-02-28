@@ -1,14 +1,96 @@
 import { getMonthByStep } from './month'
 import {
+  DateCompare,
   DateInfo,
   DateInfoBase,
+  DateInfoBase1,
   DateStr,
   GntCalendarOptions,
   Integer,
   IntegerStr,
 } from './types'
-import { fillTo, getMonthLen, isNonNegInt, parseDate } from './utils'
+import {
+  fillTo,
+  getMonthLen,
+  isLeapYear,
+  isNonNegInt,
+  parseDate,
+} from './utils'
 import { getDay } from './week'
+
+export function compareDates(
+  date1: DateInfoBase1 | DateStr,
+  date2: DateInfoBase1 | DateStr,
+) {
+  const $date1 = typeof date1 === 'string' ? parseDate(date1) : date1
+  const $date2 = typeof date2 === 'string' ? parseDate(date2) : date2
+  if (!$date1 || !$date2) return DateCompare.Equal
+  let diff = +$date1.year - +$date2.year
+  if (diff)
+    return diff > 0 ? DateCompare.GreatThanYear : DateCompare.LessThanYear
+  diff = +$date1.month - +$date2.month
+  if (diff)
+    return diff > 0 ? DateCompare.GreatThanMonth : DateCompare.LessThanMonth
+  diff = +$date1.date - +$date2.date
+  if (diff)
+    return diff > 0 ? DateCompare.GreatThanDate : DateCompare.LessThanDate
+  return DateCompare.Equal
+}
+
+export function calcStepBetweenDates(
+  date1: DateInfoBase1 | DateStr,
+  date2: DateInfoBase1 | DateStr,
+): number {
+  const $date1 = typeof date1 === 'string' ? parseDate(date1) : date1
+  const $date2 = typeof date2 === 'string' ? parseDate(date2) : date2
+  if (!$date1 || !$date2) return 0
+  const sorted = [$date1, $date2].sort(compareDates)
+
+  const yearStep = +sorted[1].year - +sorted[0].year
+  if (yearStep > 1) {
+    return (
+      new Array(yearStep)
+        .join(',')
+        .split(',')
+        .reduce((pre, v, i) => {
+          const year = +sorted[0].year + i + 1
+          return pre + (isLeapYear(year) ? 366 : 365)
+        }, 0) +
+      calcStepBetweenDates(sorted[0], { ...sorted[0], month: 12, date: 31 }) +
+      calcStepBetweenDates({ ...sorted[1], month: 1, date: 1 }, sorted[1])
+    )
+  }
+
+  if (yearStep === 1) {
+    return (
+      calcStepBetweenDates(sorted[0], { ...sorted[0], month: 12, date: 31 }) +
+      calcStepBetweenDates({ ...sorted[1], month: 1, date: 1 }, sorted[1])
+    )
+  }
+
+  const monthStep = +sorted[1].month - +sorted[0].month
+  if (monthStep > 1) {
+    return (
+      new Array(monthStep)
+        .join(',')
+        .split(',')
+        .reduce((pre, v, i) => {
+          const month = +sorted[0].month + i + 1
+          return pre + getMonthLen(sorted[0].year, month)
+        }, 0) +
+      calcStepBetweenDates(sorted[0], { ...sorted[0], date: 31 }) +
+      calcStepBetweenDates({ ...sorted[1], date: 1 }, sorted[1])
+    )
+  }
+  if (monthStep === 1) {
+    return (
+      calcStepBetweenDates(sorted[0], { ...sorted[0], date: 31 }) +
+      calcStepBetweenDates({ ...sorted[1], date: 1 }, sorted[1])
+    )
+  }
+
+  return +sorted[1].month - +sorted[0].month
+}
 
 export function gntCalendar(
   monthInfo: { year: IntegerStr; month: IntegerStr } | DateStr,
@@ -40,13 +122,7 @@ export function gntCalendar(
   const calendar: DateInfo[][] = []
 
   const canChose = ($year: number, $month: number, date: number) => {
-    const compare = (
-      t:
-        | { year: IntegerStr; month: IntegerStr; date: IntegerStr }
-        | null
-        | undefined,
-      flag?: 1 | -1,
-    ) => {
+    const compare = (t: DateInfoBase1 | null | undefined, flag?: 1 | -1) => {
       if (!t) return true
 
       flag = flag || 1
@@ -67,6 +143,12 @@ export function gntCalendar(
   const firstDay = getDay(year, month, 1)
   const fillDateLen = firstDay === 0 ? 7 : firstDay
 
+  const $now = new Date()
+  const now = {
+    year: $now.getFullYear(),
+    month: $now.getMonth() + 1,
+    date: $now.getDate(),
+  }
   for (let i = 0; i < lineLen; i += 1) {
     calendar[i] = []
 
@@ -79,7 +161,9 @@ export function gntCalendar(
           date: fillTo(2, d),
           isInThisMonth: false,
           canBeChose: canChose(+prevMonth.year, +prevMonth.month, d),
+          isNow: false,
         }
+        calendar[i][j].isNow = calcStepBetweenDates(now, calendar[i][j]) === 0
         // eslint-disable-next-line no-continue
         continue
       }
@@ -90,7 +174,9 @@ export function gntCalendar(
           date: fillTo(2, incrementDate),
           isInThisMonth: true,
           canBeChose: canChose(year, month, incrementDate),
+          isNow: false,
         }
+        calendar[i][j].isNow = calcStepBetweenDates(now, calendar[i][j]) === 0
         incrementDate += 1
       } else {
         calendar[i][j] = {
@@ -103,7 +189,9 @@ export function gntCalendar(
             +nextMonth.month,
             nextIncrementDate,
           ),
+          isNow: false,
         }
+        calendar[i][j].isNow = calcStepBetweenDates(now, calendar[i][j]) === 0
         nextIncrementDate += 1
       }
     }

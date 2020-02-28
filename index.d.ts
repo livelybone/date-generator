@@ -56,6 +56,12 @@ interface DateInfoBase {
   date: string
 }
 
+interface DateInfoBase1 {
+  year: IntegerStr
+  month: IntegerStr
+  date: IntegerStr
+}
+
 interface TimeInfo {
   /**
    * String that already been formatted, such as `02`
@@ -79,6 +85,7 @@ interface TimeInfo {
 
 interface DateInfo extends DateInfoBase {
   isInThisMonth: boolean
+  isNow: boolean
   canBeChose: boolean
 }
 
@@ -86,23 +93,11 @@ interface GntCalendarOptions {
   /**
    * Min date
    * */
-  min?:
-    | {
-        year: IntegerStr
-        month: IntegerStr
-        date: IntegerStr
-      }
-    | DateStr
+  min?: DateInfoBase1 | DateStr
   /**
    * Max date
    * */
-  max?:
-    | {
-        year: IntegerStr
-        month: IntegerStr
-        date: IntegerStr
-      }
-    | DateStr
+  max?: DateInfoBase1 | DateStr
 }
 
 interface MonthInfo {
@@ -129,21 +124,11 @@ interface GntMonthOptions {
   /**
    * Min Month
    * */
-  min?:
-    | {
-        year: IntegerStr
-        month: IntegerStr
-      }
-    | DateStr
+  min?: Pick<DateInfoBase1, 'year' | 'month'> | DateStr
   /**
    * Max Month
    * */
-  max?:
-    | {
-        year: IntegerStr
-        month: IntegerStr
-      }
-    | DateStr
+  max?: Pick<DateInfoBase1, 'year' | 'month'> | DateStr
 }
 
 interface GntYearOptions {
@@ -170,6 +155,26 @@ interface YearInfo {
   year: string
   canBeChose: boolean
 }
+
+declare enum DateCompare {
+  GreatThanYear = 100,
+  GreatThanMonth = 10,
+  GreatThanDate = 1,
+  Equal = 0,
+  LessThanDate = -1,
+  LessThanMonth = -10,
+  LessThanYear = -100,
+}
+
+declare function compareDates(
+  date1: DateInfoBase1 | DateStr,
+  date2: DateInfoBase1 | DateStr,
+): DateCompare
+
+declare function calcStepBetweenDates(
+  date1: DateInfoBase1 | DateStr,
+  date2: DateInfoBase1 | DateStr,
+): number
 
 declare function gntCalendar(
   monthInfo:
@@ -255,8 +260,10 @@ declare function gntYear(
 ): YearInfo[][]
 
 export {
+  DateCompare,
   DateInfo,
   DateInfoBase,
+  DateInfoBase1,
   DateStr,
   DefaultMax,
   GetOptions,
@@ -271,6 +278,8 @@ export {
   TimeInfo,
   TimeStr,
   YearInfo,
+  calcStepBetweenDates,
+  compareDates,
   fillTo,
   getDateByStep,
   getDay,
