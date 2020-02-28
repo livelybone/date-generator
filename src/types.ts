@@ -33,8 +33,8 @@ export interface GetResultItem<M extends DefaultMax> {
 
 export interface GetOptions {
   interval?: Integer
-  min: Integer
-  max: Integer
+  min?: Integer
+  max?: Integer
 }
 
 export interface DateInfoBase {

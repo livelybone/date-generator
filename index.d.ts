@@ -31,8 +31,8 @@ interface GetResultItem<M extends DefaultMax> {
 
 interface GetOptions {
   interval?: Integer
-  min: Integer
-  max: Integer
+  min?: Integer
+  max?: Integer
 }
 
 interface DateInfoBase {
@@ -170,12 +170,14 @@ declare function getDateByStep(
   step: Integer,
 ): typeof currDate extends DateStr ? DateInfoBase | null : DateInfoBase
 
-declare const getHour: (options: GetOptions) => GetResultItem<DefaultMax.Hour>[]
+declare const getHour: (
+  options?: GetOptions | undefined,
+) => GetResultItem<DefaultMax.Hour>[]
 declare const getMinute: (
-  options: GetOptions,
+  options?: GetOptions | undefined,
 ) => GetResultItem<DefaultMax.Minute>[]
 declare const getSecond: (
-  options: GetOptions,
+  options?: GetOptions | undefined,
 ) => GetResultItem<DefaultMax.Minute>[]
 
 declare function gntMonth(
@@ -212,7 +214,7 @@ declare function getMonthLen(
 
 declare function getIntervalVal<T extends DefaultMax>(
   defaultMax: T,
-): (options: GetOptions) => GetResultItem<T>[]
+): (options?: GetOptions | undefined) => GetResultItem<T>[]
 
 declare function parseDate(date: DateStr): DateInfoBase | null
 

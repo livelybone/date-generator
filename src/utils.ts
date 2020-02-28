@@ -57,23 +57,16 @@ export function getMonthLen(year: IntegerStr, month: IntegerStr) {
 }
 
 export function getIntervalVal<T extends DefaultMax>(defaultMax: T) {
-  return (options: GetOptions): GetResultItem<T>[] => {
-    options = objAssign({ interval: 1, min: 0, max: defaultMax - 1 }, options)
-    const reset = (k: keyof GetOptions) => {
-      if (!isNonNegInt(options[k]!)) {
-        options[k] = Math.ceil(Math.abs(options[k]!))
-      }
-    }
-    reset('interval')
-    reset('min')
-    reset('max')
-
+  return (options?: GetOptions): GetResultItem<T>[] => {
+    const interval = Math.ceil(Math.abs((options && options.interval) || 1))
+    const min = Math.ceil(Math.abs((options && options.min) || 0))
+    const max = Math.ceil(Math.abs((options && options.max) || defaultMax - 1))
     const arr = []
-    for (let i = 0; i < defaultMax; i += options.interval!) {
+    for (let i = 0; i < defaultMax; i += interval!) {
       arr.push({
         value: fillTo(2, i),
         max: defaultMax,
-        canBeChose: i >= options.min && i <= options.max,
+        canBeChose: i >= min && i <= max,
       })
     }
     return arr
