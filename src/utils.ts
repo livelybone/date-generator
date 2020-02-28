@@ -74,6 +74,7 @@ export function getIntervalVal<T extends DefaultMax>(defaultMax: T) {
 }
 
 export function parseDate(date: DateStr) {
+  if (!date) return null
   const reg = /^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/
 
   if (!reg.test(date)) {
@@ -97,6 +98,8 @@ export function parseDate(date: DateStr) {
 }
 
 export function parseTime(time: TimeStr) {
+  if (!time) return null
+
   const reg = /^(\d{1,2}):?(\d{1,2})?:?(\d{1,2})?$/
 
   if (!reg.test(time)) {

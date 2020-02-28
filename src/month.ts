@@ -12,8 +12,10 @@ export function gntMonth(year: IntegerStr, options?: GntMonthOptions) {
   options = options || {}
 
   const splitLen = options.splitLen || 3
-  const min = (options.min && parseDate(options.min)) || undefined
-  const max = (options.max && parseDate(options.max)) || undefined
+  const min =
+    typeof options.min === 'string' ? parseDate(options.min) : options.min
+  const max =
+    typeof options.max === 'string' ? parseDate(options.max) : options.max
 
   const arr: MonthInfo[][] = []
   const line = Math.ceil(12 / splitLen)

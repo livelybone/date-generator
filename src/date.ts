@@ -25,8 +25,10 @@ export function gntCalendar(
     throw new Error('Prop year and month must be a non-negative number')
   }
 
-  const minD = options.min && parseDate(options.min)
-  const maxD = options.max && parseDate(options.max)
+  const minD =
+    typeof options.min === 'string' ? parseDate(options.min) : options.min
+  const maxD =
+    typeof options.max === 'string' ? parseDate(options.max) : options.max
 
   const prevMonth = getMonthByStep({ year, month }, -1)
   const prevMonthLen = getMonthLen(prevMonth.year, prevMonth.month)
@@ -39,7 +41,10 @@ export function gntCalendar(
 
   const canChose = ($year: number, $month: number, date: number) => {
     const compare = (
-      t: DateInfoBase | '' | null | undefined,
+      t:
+        | { year: IntegerStr; month: IntegerStr; date: IntegerStr }
+        | null
+        | undefined,
       flag?: 1 | -1,
     ) => {
       if (!t) return true

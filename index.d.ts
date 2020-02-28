@@ -86,11 +86,23 @@ interface GntCalendarOptions {
   /**
    * Min date
    * */
-  min?: DateStr
+  min?:
+    | {
+        year: IntegerStr
+        month: IntegerStr
+        date: IntegerStr
+      }
+    | DateStr
   /**
    * Max date
    * */
-  max?: DateStr
+  max?:
+    | {
+        year: IntegerStr
+        month: IntegerStr
+        date: IntegerStr
+      }
+    | DateStr
 }
 
 interface MonthInfo {
@@ -117,11 +129,21 @@ interface GntMonthOptions {
   /**
    * Min Month
    * */
-  min?: DateStr
+  min?:
+    | {
+        year: IntegerStr
+        month: IntegerStr
+      }
+    | DateStr
   /**
    * Max Month
    * */
-  max?: DateStr
+  max?:
+    | {
+        year: IntegerStr
+        month: IntegerStr
+      }
+    | DateStr
 }
 
 interface GntYearOptions {
