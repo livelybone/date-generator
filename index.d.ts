@@ -114,6 +114,7 @@ interface MonthInfo {
    * */
   month: NumberStr
   canBeChose: boolean
+  isNow: boolean
 }
 
 interface GntMonthOptions {
@@ -154,6 +155,7 @@ interface YearInfo {
    * */
   year: NumberStr
   canBeChose: boolean
+  isNow: boolean
 }
 
 declare enum DateCompare {

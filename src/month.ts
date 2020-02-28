@@ -1,3 +1,4 @@
+import { nowDate } from './date'
 import {
   DateStr,
   GntMonthOptions,
@@ -19,6 +20,7 @@ export function gntMonth(year: IntegerStr, options?: GntMonthOptions) {
 
   const arr: MonthInfo[][] = []
   const line = Math.ceil(12 / splitLen)
+  const now = nowDate()
   for (let i = 0; i < line; i += 1) {
     arr[i] = []
     for (let j = 0; j < splitLen; j += 1) {
@@ -41,6 +43,7 @@ export function gntMonth(year: IntegerStr, options?: GntMonthOptions) {
           (!min &&
             !!max &&
             (year < +max.year || (year === +max.year && month <= +max.month))),
+        isNow: +now.year === year && +now.month === month,
       })
     }
   }

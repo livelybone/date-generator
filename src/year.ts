@@ -1,3 +1,4 @@
+import { nowDate } from './date'
 import { GntYearOptions, Integer, IntegerStr, YearInfo } from './types'
 import { fillTo, isNonNegInt } from './utils'
 
@@ -19,6 +20,7 @@ export function gntYear(
 
   const arr: YearInfo[][] = []
   const line = Math.ceil(len / splitLen)
+  const now = nowDate()
   for (let i = 0; i < line; i += 1) {
     arr[i] = []
     for (let j = 0; j < splitLen; j += 1) {
@@ -31,6 +33,7 @@ export function gntYear(
           (!!min && !!max && year >= min && year <= max) ||
           (!min && !!max && year <= max) ||
           (!max && !!min && year >= min),
+        isNow: +now.year === year,
       })
     }
   }
