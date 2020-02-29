@@ -88,7 +88,7 @@ export function parseDate(date: DateStr) {
 
   const dateObj = {
     year: fillTo(4, arr[1]),
-    month: fillTo(2, positiveMod(+arr[2] || 1, 13)),
+    month: fillTo(2, positiveMod(+arr[2] || 1, 12) || 12),
   } as DateInfoBase
 
   const monthLen = getMonthLen(dateObj.year, dateObj.month)
