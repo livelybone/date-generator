@@ -78,8 +78,10 @@ export function parseDate(date: DateStr) {
   const reg = /^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/
 
   if (!reg.test(date)) {
-    console.error(
-      'Utils.parseDate: Param date is invalid. The right example: 2018[-02][-01]',
+    console.warn(
+      new Error(
+        `Param date \`${date}\` is invalid. The right example: 2018[-02][-01]`,
+      ),
     )
     return null
   }
@@ -103,8 +105,10 @@ export function parseTime(time: TimeStr) {
   const reg = /^(\d{1,2}):?(\d{1,2})?:?(\d{1,2})?$/
 
   if (!reg.test(time)) {
-    console.error(
-      'Utils.parseDate: Param time is invalid. The right example: 18[:02][:01]',
+    console.warn(
+      new Error(
+        `Param time \`${time}\` is invalid. The right example: 18[:02][:01]`,
+      ),
     )
     return null
   }
