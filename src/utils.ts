@@ -62,7 +62,7 @@ export function getIntervalVal<T extends DefaultMax>(defaultMax: T) {
     const min = Math.ceil(Math.abs((options && options.min) || 0))
     const max = Math.ceil(Math.abs((options && options.max) || defaultMax - 1))
     const arr = []
-    for (let i = 0; i < defaultMax; i += interval!) {
+    for (let i = 0; i <= defaultMax; i += interval!) {
       arr.push({
         value: fillTo(2, i),
         max: defaultMax,
