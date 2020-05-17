@@ -98,6 +98,12 @@ interface GntCalendarOptions {
    * Max date
    * */
   max?: DateInfoBase1 | DateStr
+  /**
+   * The start day of the week
+   *
+   * Default is 0 (Sunday)
+   * */
+  firstDayOfWeek?: number
 }
 
 interface MonthInfo {
@@ -174,8 +180,8 @@ declare function compareDates(
 ): DateCompare
 
 declare function calcStepBetweenDates(
-  date1: DateInfoBase1 | DateStr,
-  date2: DateInfoBase1 | DateStr,
+  date: DateInfoBase1 | DateStr,
+  targetDate: DateInfoBase1 | DateStr,
 ): number
 
 declare function gntCalendar(

@@ -99,6 +99,12 @@ export interface GntCalendarOptions {
    * Max date
    * */
   max?: DateInfoBase1 | DateStr
+  /**
+   * The start day of the week
+   *
+   * Default is 0 (Sunday)
+   * */
+  firstDayOfWeek?: number
 }
 
 export interface MonthInfo {

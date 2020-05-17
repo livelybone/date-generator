@@ -133,6 +133,7 @@ export function gntCalendar(
     typeof options.min === 'string' ? parseDate(options.min) : options.min
   const maxD =
     typeof options.max === 'string' ? parseDate(options.max) : options.max
+  const firstDayOfWeek = options.firstDayOfWeek || 0
 
   const prevMonth = getMonthByStep({ year, month }, -1)
   const prevMonthLen = getMonthLen(prevMonth.year, prevMonth.month)
@@ -163,7 +164,7 @@ export function gntCalendar(
   let incrementDate = 1
   let nextIncrementDate = 1
   const firstDay = getDay(year, month, 1)
-  const fillDateLen = firstDay === 0 ? 7 : firstDay
+  const fillDateLen = (firstDay - firstDayOfWeek + 7) % 7
 
   const now = nowDate()
   for (let i = 0; i < lineLen; i += 1) {

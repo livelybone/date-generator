@@ -1,6 +1,6 @@
 {
   "name": "@livelybone/date-generator",
-  "version": "4.1.7",
+  "version": "4.2.0",
   "description": "A module that generates calendar, which includes years, months, dates, hours, minutes, seconds",
   "main": "./lib/umd/index.js",
   "module": "./lib/es/index.js",
